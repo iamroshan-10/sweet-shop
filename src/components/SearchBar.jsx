@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './SearchBar.css'
 
-function SearchBar() {
+function SearchBar({ onSearch, onFilterClick }) {
+  const [searchTerm, setSearchTerm] = useState('')
+
   const handleSearch = (e) => {
-    // functionality here
+    const value = e.target.value
+    setSearchTerm(value)
+    if (onSearch) {
+      onSearch(value)
+    }
   }
 
   const handleFilterClick = () => {
-    // functionality here
+    if (onFilterClick) {
+      onFilterClick()
+    }
   }
 
   return (
@@ -22,6 +30,7 @@ function SearchBar() {
           type="text"
           className="search-input"
           placeholder="Search for your favorite sweets..."
+          value={searchTerm}
           onChange={handleSearch}
         />
       </div>
